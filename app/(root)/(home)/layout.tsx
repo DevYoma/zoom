@@ -1,10 +1,20 @@
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
+import { Metadata } from 'next';
 import React from 'react'
 
 type HomeLayoutProp = {
     children: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "Yooma",
+  description: "Video calling app",
+  icons: {
+    icon: "/icons/logo.svg",
+  },
+};
+
 
 const HomeLayout = ({ children }: HomeLayoutProp) => {
   return (
