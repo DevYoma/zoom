@@ -12,10 +12,10 @@ type MeetingModalProp = {
     isOpen: boolean;
     onClose: () => void;
     title: string;
-    className: string;
+    className?: string;
     children?: ReactNode;
     handleClick?: () => void;
-    buttonText: string;
+    buttonText?: string;
     image?: string;
     buttonIcon?: string;
     isLoading?: boolean;
