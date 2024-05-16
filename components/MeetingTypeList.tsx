@@ -9,6 +9,7 @@ import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useToast } from "@/components/ui/use-toast";
 import { Textarea } from "./ui/textarea";
 import ReactDatePicker from 'react-datepicker';
+import { Input } from "@/components/ui/input"
 
 const MeetingTypeList = () => {
   const { toast } = useToast();
@@ -140,12 +141,14 @@ const MeetingTypeList = () => {
             <label className="text-base text-normal leading-[22px] text-sky-2">
               Select Date and Time
             </label>
-            <ReactDatePicker 
+            <ReactDatePicker
               selected={values.dateTime}
-              onChange={(date) => setValues({
-                ...values, 
-                dateTime: date!
-              })}
+              onChange={(date) =>
+                setValues({
+                  ...values,
+                  dateTime: date!,
+                })
+              }
               showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={15}
@@ -157,14 +160,14 @@ const MeetingTypeList = () => {
         </MeetingModal>
       ) : (
         <MeetingModal
-          isOpen={meetingState === 'isScheduleMeeting'}
+          isOpen={meetingState === "isScheduleMeeting"}
           onClose={() => setMeetingState(undefined)}
           title="Meeting Created"
           handleClick={() => {
             navigator.clipboard.writeText(meetingLink);
-            toast({ title: 'Link Copied' });
+            toast({ title: "Link Copied" });
           }}
-          image={'/icons/checked.svg'}
+          image={"/icons/checked.svg"}
           buttonIcon="/icons/copy.svg"
           className="text-center"
           buttonText="Copy Meeting Link"
@@ -180,6 +183,21 @@ const MeetingTypeList = () => {
         handleClick={createMeeting}
         isLoading={isLoading}
       />
+        
+      <MeetingModal
+        isOpen={meetingState === "isJoiningMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        title="Type the link here"
+        className="text-center"
+        buttonText="Join Meeting"
+        handleClick={() => router.push(values.link)}
+      >
+        <Input 
+          placeholder="Meeting link"
+          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          onChange={(e) => setValues({ ...values, link: e.target.value })}
+        />
+      </MeetingModal>
     </section>
   );
 };
